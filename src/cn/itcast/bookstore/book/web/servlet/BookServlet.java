@@ -23,22 +23,35 @@ public class BookServlet extends BaseServlet {
      * @throws ServletException
      * @throws IOException
      */
-    public String findAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String findAll(HttpServletRequest request, HttpServletResponse response) {
         request.setAttribute("bookList", bookService.findAll());
         return "f:/jsps/book/list.jsp";
     }
 
     /**
      * 按分类查询图书
+     *
      * @param request
      * @param response
      * @return
      * @throws ServletException
      * @throws IOException
      */
-    public String findByCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String findByCategory(HttpServletRequest request, HttpServletResponse response) {
         String cid = request.getParameter("cid");
-        request.setAttribute("bookList",bookService.findByCategory(cid));
+        request.setAttribute("bookList", bookService.findByCategory(cid));
         return "f:/jsps/book/list.jsp";
+    }
+
+    /**
+     * 加载图书
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    public String load(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("book", bookService.load(request.getParameter("bid")));
+        return "f:/jsps/book/desc.jsp";
     }
 }
