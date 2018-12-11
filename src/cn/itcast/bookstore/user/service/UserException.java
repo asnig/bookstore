@@ -1,6 +1,6 @@
 package cn.itcast.bookstore.user.service;
 
-public class UserException extends Exception{
+public class UserException extends Exception {
     public UserException() {
         super();
     }

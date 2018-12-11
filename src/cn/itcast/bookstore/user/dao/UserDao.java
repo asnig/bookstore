@@ -41,6 +41,7 @@ public class UserDao {
 
     /**
      * 按激活码查找
+     *
      * @param code
      * @return
      */
@@ -56,10 +57,11 @@ public class UserDao {
 
     /**
      * 更新激活状态
+     *
      * @param uid
      * @param state
      */
-    public void updateState(String uid,boolean state) {
+    public void updateState(String uid, boolean state) {
         String sql = "update tb_user set state=? where uid =?";
         try {
             qr.update(sql, state, uid);

@@ -4,7 +4,6 @@ package cn.itcast.bookstore.user.domain;
  * User的领域对象
  *
  * @author cxf
- *
  */
 public class User {
     /*

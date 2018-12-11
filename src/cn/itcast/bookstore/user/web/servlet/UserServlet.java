@@ -38,9 +38,9 @@ public class UserServlet extends BaseServlet {
         String code = request.getParameter("code");
         try {
             userService.active(code);
-            request.setAttribute("msg","恭喜你激活成功，可以马上登录了！");
+            request.setAttribute("msg", "恭喜你激活成功，可以马上登录了！");
         } catch (UserException e) {
-            request.setAttribute("msg",e.getMessage());
+            request.setAttribute("msg", e.getMessage());
         }
         return "f:/jsps/msg.jsp";
     }
@@ -123,6 +123,7 @@ public class UserServlet extends BaseServlet {
 
     /**
      * 登录功能
+     *
      * @param request
      * @param response
      * @return
@@ -133,11 +134,11 @@ public class UserServlet extends BaseServlet {
         User form = CommonUtils.toBean(request.getParameterMap(), User.class);
         try {
             User user = userService.login(form);
-            request.getSession().setAttribute("session_user",user);
+            request.getSession().setAttribute("session_user", user);
             return "r:/index.jsp";
         } catch (UserException e) {
             request.setAttribute("msg", e.getMessage());
-            request.setAttribute("form",form);
+            request.setAttribute("form", form);
             return "f:/jsps/user/login.jsp";
         }
 
@@ -147,6 +148,7 @@ public class UserServlet extends BaseServlet {
 
     /**
      * 退出功能
+     *
      * @param request
      * @param response
      * @return
