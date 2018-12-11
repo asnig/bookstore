@@ -14,7 +14,17 @@ import java.io.IOException;
 public class BookServlet extends BaseServlet {
     private BookService bookService = new BookService();
 
-    @Override
-    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /**
+     * 查询所有图书
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws ServletException
+     * @throws IOException
+     */
+    public String findAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("bookList", bookService.findAll());
+        return "f:/jsps/book/list.jsp";
     }
 }
