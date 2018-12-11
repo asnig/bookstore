@@ -13,12 +13,27 @@ public class BookDao {
 
     /**
      * 查询所有图书
+     *
      * @return
      */
     public List<Book> findAll() {
         String sql = "select * from book";
         try {
             return qr.query(sql, new BeanListHandler<>(Book.class));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 按分类查询图书
+     * @param cid
+     * @return
+     */
+    public List<Book> findByCategory(String cid) {
+        String sql = "select * from book where cid=?";
+        try {
+            return qr.query(sql, new BeanListHandler<>(Book.class), cid);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
