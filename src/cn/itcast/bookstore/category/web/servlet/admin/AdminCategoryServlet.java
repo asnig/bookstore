@@ -1,6 +1,8 @@
 package cn.itcast.bookstore.category.web.servlet.admin;
 
+import cn.itcast.bookstore.category.domain.Category;
 import cn.itcast.bookstore.category.service.CategoryService;
+import cn.itcast.commons.CommonUtils;
 import cn.itcast.servlet.BaseServlet;
 
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +13,20 @@ import javax.servlet.http.HttpServletResponse;
 public class AdminCategoryServlet extends BaseServlet {
     private CategoryService categoryService = new CategoryService();
 
+    /**
+     * 添加分类
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    public String add(HttpServletRequest request, HttpServletResponse response) {
+        Category category = CommonUtils.toBean(request.getParameterMap(), Category.class);
+        category.setCid(CommonUtils.uuid());
+
+        categoryService.add(category);
+        return findAll(request, response);
+    }
     public String findAll(HttpServletRequest request, HttpServletResponse response) {
         /*
         1.调用service方法,得到所有分类

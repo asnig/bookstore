@@ -11,6 +11,11 @@ import java.util.List;
 public class CategoryDao {
     private QueryRunner qr = new TxQueryRunner();
 
+    /**
+     * 查询所有分类
+     *
+     * @return
+     */
     public List<Category> findAll() {
         String sql = "select * from category";
         try {
@@ -18,5 +23,20 @@ public class CategoryDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * 添加分类
+     *
+     * @param category
+     */
+    public void add(Category category) {
+        try {
+            String sql = "insert into category values(?,?)";
+            qr.update(sql, category.getCid(), category.getCname());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
