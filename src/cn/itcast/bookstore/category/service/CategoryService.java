@@ -43,4 +43,23 @@ public class CategoryService {
         //删除该图书分类
         categoryDao.delete(cid);
     }
+
+    /**
+     * 根据cid加载指定分类
+     *
+     * @param cid
+     * @return
+     */
+    public Category load(String cid) {
+        return categoryDao.findByCid(cid);
+    }
+
+    /**
+     * 修改分类
+     *
+     * @param category
+     */
+    public void edit(Category category) {
+        categoryDao.edit(category);
+    }
 }

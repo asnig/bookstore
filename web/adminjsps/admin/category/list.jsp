@@ -43,7 +43,7 @@
     <tr bordercolor="rgb(78,78,78)">
         <td>${c.cname}</td>
         <td>
-            <a href="<c:url value='/adminjsps/admin/category/mod.jsp'/>">修改</a> |
+            <a href="<c:url value='/admin/AdminCategoryServlet?method=editPre&cid=${c.cid}'/>">修改</a> |
             <a onclick="return confirm('你确定要删除吗？')"
                href="<c:url value='/admin/AdminCategoryServlet?method=delete&cid=${c.cid}'/>">删除</a>
         </td>

@@ -16,8 +16,34 @@ public class AdminCategoryServlet extends BaseServlet {
     private BookService bookService = new BookService();
 
     /**
-     * 删除分类
+     * 修改分类
      *
+     * @param request
+     * @param response
+     * @return
+     */
+    public String edit(HttpServletRequest request, HttpServletResponse response) {
+        Category category = CommonUtils.toBean(request.getParameterMap(), Category.class);
+        categoryService.edit(category);
+        return findAll(request, response);
+    }
+
+    /**
+     * 加载当前分类到表单中
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    public String editPre(HttpServletRequest request, HttpServletResponse response) {
+        String cid = request.getParameter("cid");
+        request.setAttribute("category", categoryService.load(cid));
+        return "f:/adminjsps/admin/category/mod.jsp";
+
+    }
+
+    /**
+     * 删除分类
      * @param request
      * @param response
      * @return
