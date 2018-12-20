@@ -11,6 +11,23 @@ public class OrderService {
     private OrderDao orderDao = new OrderDao();
 
     /**
+     * 支付方法
+     *
+     * @param oid
+     */
+    public void zhiFu(String oid) {
+        /*
+        1.如果订单的状态
+            如果状态为1，那么执行下面的代码
+            如果状态不为1，那么本方法什么都不做
+         */
+        int state = orderDao.getStateByOid(oid);
+        if (state == 1) {
+            orderDao.updateState(oid, 2);
+        }
+    }
+
+    /**
      * 添加订单
      * 需要处理事务
      *
