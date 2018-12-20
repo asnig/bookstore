@@ -39,4 +39,18 @@ public class CategoryDao {
         }
 
     }
+
+    /**
+     * 删除分类
+     *
+     * @param cid
+     */
+    public void delete(String cid) {
+        try {
+            String sql = "delete from category where cid=?";
+            qr.update(sql, cid);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

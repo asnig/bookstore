@@ -5,12 +5,14 @@ import cn.itcast.jdbc.TxQueryRunner;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class BookDao {
     private QueryRunner qr = new TxQueryRunner();
+
 
     /**
      * 查询所有图书
@@ -51,6 +53,22 @@ public class BookDao {
         String sql = "select * from book where bid=?";
         try {
             return qr.query(sql, new BeanHandler<>(Book.class), bid);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 查询指定分类下的图书本数
+     *
+     * @param cid
+     * @return
+     */
+    public int getCountByCid(String cid) {
+        try {
+            String sql = "select count(*) from book where cid=?";
+            Number cnt = (Number) qr.query(sql, new ScalarHandler(), cid);
+            return cnt.intValue();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
