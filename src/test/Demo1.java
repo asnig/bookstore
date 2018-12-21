@@ -7,6 +7,7 @@ import cn.itcast.commons.CommonUtils;
 import cn.itcast.jdbc.TxQueryRunner;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.junit.Test;
 
@@ -67,5 +68,17 @@ public class Demo1 {
         orderItem.setBook(book);
         System.out.println("orderItem=============" + orderItem);
         return orderItem;
+    }
+
+    @Test
+    public void fun1() {
+        try {
+            String sql = "select * from book where bid=?";
+            Map<String, Object> map = qr.query(sql, new MapHandler(), 3);
+            System.out.println(map);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
