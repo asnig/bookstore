@@ -188,4 +188,41 @@ public class OrderDao {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * 查询所有订单
+     *
+     * @return
+     */
+    public List<Order> findAll() {
+        try {
+            String sql = "select * from orders";
+            List<Order> orderList = qr.query(sql, new BeanListHandler<>(Order.class));
+            for (Order order : orderList) {
+                loadOrderItems(order);
+            }
+            return orderList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 根据订单状态查询订单
+     *
+     * @param state
+     * @return
+     */
+    public List<Order> findByState(String state) {
+        try {
+            String sql = "select * from orders where state=?";
+            List<Order> orderList = qr.query(sql, new BeanListHandler<>(Order.class), state);
+            for (Order order : orderList) {
+                loadOrderItems(order);
+            }
+            return orderList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

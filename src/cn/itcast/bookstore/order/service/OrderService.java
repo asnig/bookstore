@@ -90,4 +90,22 @@ public class OrderService {
     }
 
 
+    /**
+     * 查询所有订单
+     *
+     * @return
+     */
+    public List<Order> findAll() {
+        return orderDao.findAll();
+    }
+
+    /**
+     * 根据订单状态查询订单
+     *
+     * @param state
+     * @return
+     */
+    public List<Order> findByState(String state) {
+        return orderDao.findByState(state);
+    }
 }
