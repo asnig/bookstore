@@ -116,4 +116,21 @@ public class BookDao {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * 修改图书
+     *
+     * @param book
+     */
+    public void edit(Book book) {
+        try {
+            String sql = "update book set bname=?,price=?,author=?,image=?,cid=? where bid=?";
+            Object[] params = {book.getBname(), book.getPrice(),
+                    book.getAuthor(), book.getImage(),
+                    book.getCategory().getCid(), book.getBid()};
+            qr.update(sql, params);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

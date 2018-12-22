@@ -2,7 +2,9 @@ package cn.itcast.bookstore.book.web.servlet.admin;
 
 import cn.itcast.bookstore.book.domain.Book;
 import cn.itcast.bookstore.book.service.BookService;
+import cn.itcast.bookstore.category.domain.Category;
 import cn.itcast.bookstore.category.service.CategoryService;
+import cn.itcast.commons.CommonUtils;
 import cn.itcast.servlet.BaseServlet;
 
 import javax.servlet.annotation.WebServlet;
@@ -62,6 +64,21 @@ public class AdminBookServlet extends BaseServlet {
     public String delete(HttpServletRequest request, HttpServletResponse response) {
         String bid = request.getParameter("bid");
         bookService.delete(bid);
+        return findAll(request, response);
+    }
+
+    /**
+     * 修改图书
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    public String edit(HttpServletRequest request, HttpServletResponse response) {
+        Book book = CommonUtils.toBean(request.getParameterMap(), Book.class);
+        Category category = CommonUtils.toBean(request.getParameterMap(), Category.class);
+        book.setCategory(category);
+        bookService.edit(book);
         return findAll(request, response);
     }
 }
