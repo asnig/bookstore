@@ -15,6 +15,18 @@ public class AdminBookServlet extends BaseServlet {
     private CategoryService categoryService = new CategoryService();
 
     /**
+     * 添加图书
+     *
+     * @param request
+     * @param responsep
+     * @return
+     */
+    public String addPre(HttpServletRequest request, HttpServletResponse responsep) {
+        request.setAttribute("categoryList", categoryService.findAll());
+        return "f:/adminjsps/admin/book/add.jsp";
+    }
+
+    /**
      * 加载图书
      *
      * @param request

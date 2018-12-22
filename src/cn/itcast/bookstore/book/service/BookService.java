@@ -36,4 +36,13 @@ public class BookService {
     public Book load(String bid) {
         return bookDao.findByBid(bid);
     }
+
+    /**
+     * 添加图书
+     *
+     * @param book
+     */
+    public void add(Book book) {
+        bookDao.add(book);
+    }
 }
