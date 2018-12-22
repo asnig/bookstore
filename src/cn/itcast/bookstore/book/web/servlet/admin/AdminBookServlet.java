@@ -51,4 +51,17 @@ public class AdminBookServlet extends BaseServlet {
         request.setAttribute("bookList", bookService.findAll());
         return "f:/adminjsps/admin/book/list.jsp";
     }
+
+    /**
+     * 删除图书
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    public String delete(HttpServletRequest request, HttpServletResponse response) {
+        String bid = request.getParameter("bid");
+        bookService.delete(bid);
+        return findAll(request, response);
+    }
 }

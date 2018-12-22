@@ -34,13 +34,21 @@
             margin: 10px;
         }
     </style>
+    <script>
+        function setMethod(method) {
+            var ele = document.getElementById("method");
+            ele.value = method;
+        }
+    </script>
 </head>
 
 <body>
 <div>
     <img src="<c:url value='/${book.image}'/>" border="0"/>
 </div>
-<form style="margin:20px;" id="form" action="javascript:alert('操作成功！');" method="post">
+<form style="margin:20px;" id="form" action="<c:url value="/admin/AdminBookServlet"/> " method="post">
+    <input type="hidden" name="method" value="" id="method"/>
+    <input type="hidden" name="bid" value="${book.bid}">
     图书名称：<input type="text" name="bname" value="${book.bname}"/><br/>
     图书单价：<input type="text" name="price" value="${book.price}元"/><br/>
     图书作者：<input type="text" name="author" value="${book.author}"/><br/>
@@ -50,8 +58,8 @@
                 <c:if test="${c.cid eq book.category.cid}">selected="selected"</c:if>    >${c.cname}</option>
     </c:forEach>
 </select><br/>
-    <input type="submit" name="method" value="del" onclick="return confirm('是否真要删除该图书？');"/>
-    <input type="submit" name="method" value="mod"/>
+    <input type="submit" value="删除" onclick="setMethod('delete')"/>
+    <input type="submit" value="编辑" onclick="setMethod('edit')"/>
 </form>
 </body>
 </html>

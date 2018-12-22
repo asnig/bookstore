@@ -45,4 +45,13 @@ public class BookService {
     public void add(Book book) {
         bookDao.add(book);
     }
+
+    /**
+     * 删除图书
+     *
+     * @param bid
+     */
+    public void delete(String bid) {
+        bookDao.delete(bid);
+    }
 }

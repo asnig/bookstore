@@ -23,7 +23,7 @@ public class BookDao {
      * @return
      */
     public List<Book> findAll() {
-        String sql = "select * from book";
+        String sql = "select * from book where del=false";
         try {
             return qr.query(sql, new BeanListHandler<>(Book.class));
         } catch (SQLException e) {
@@ -38,7 +38,7 @@ public class BookDao {
      * @return
      */
     public List<Book> findByCategory(String cid) {
-        String sql = "select * from book where cid=?";
+        String sql = "select * from book where cid=? and del=false";
         try {
             return qr.query(sql, new BeanListHandler<>(Book.class), cid);
         } catch (SQLException e) {
@@ -98,6 +98,20 @@ public class BookDao {
                 book.getImage(), book.getCategory().getCid()};
         try {
             qr.update(sql, params);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 删除图书
+     *
+     * @param bid
+     */
+    public void delete(String bid) {
+        try {
+            String sql = "update book set del=true where bid=?";
+            qr.update(sql, bid);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
